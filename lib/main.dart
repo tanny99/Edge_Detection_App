@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'EdgeDetectionOpenCV.dart';
+import 'Screens/EdgeDetectionOpenCV.dart';
 import 'package:opencv/opencv.dart';
 import 'package:opencv/core/core.dart';
+import 'Screens/Camera_ImageSelectionScreen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -27,10 +27,9 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Column(
             children: [
-              OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EdgeDetectionPage()));}, child: Text('Camera')),
+              OutlinedButton(onPressed: (){openCamera_function();}, child: Text('Camera')),
               OutlinedButton(onPressed: (){}, child: Text('Gallery')),
-              OutlinedButton(onPressed: (){}, child: Text('URL')),
-              OutlinedButton(onPressed: (){}, child: Text('Camera')),
+              OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EdgeDetectionPage()));}, child: Text('URL')),
               OutlinedButton(onPressed: (){}, child: Text('All Converted Images')),
             ],
           )
