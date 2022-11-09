@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -98,17 +98,14 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             final image = await _controller.takePicture();
 
             if (!mounted) return;
+            File image_file=File(image.path);
 
             // If the picture was taken, display it on a new screen.
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(
-                  // Pass the automatically generated path to
-                  // the DisplayPictureScreen widget.
-                  imagePath: image.path,
-                ),
-              ),
-            );
+            final metadata = SettableMetadata(contentType: "image/jpeg");
+            final storageRef = FirebaseStorage.instance.ref();
+            final uploadTask = storageRef
+                .child("images/sample.jpg")
+                .putFile(image_file, metadata);
           } catch (e) {
             // If an error occurs, log the error to the console.
             print(e);

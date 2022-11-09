@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "386496404875",
+    "project_id": "edgedetectionapp",
+    "storage_bucket": "edgedetectionapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386496404875:android:b9636f73de5b4382d9238e",
+        "android_client_info": {
+          "package_name": "com.example.edge_detection_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386496404875-ebfdvvba83ec114cf5l13co9tp3havd0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAPpMOBy14YFTFBNbMeEsZEQNceP9IGE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386496404875-ebfdvvba83ec114cf5l13co9tp3havd0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
