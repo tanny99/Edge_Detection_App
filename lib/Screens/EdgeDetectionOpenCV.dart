@@ -19,6 +19,7 @@ class EdgeDetectionPage extends StatefulWidget {
 }
 
 class _EdgeDetectionPageState extends State<EdgeDetectionPage> {
+  final url_controller = TextEditingController();
   String _platformVersion = 'Unknown';
   dynamic res;
   Image image = Image.asset('assets/temp.png');
@@ -26,7 +27,7 @@ class _EdgeDetectionPageState extends State<EdgeDetectionPage> {
   late File file;
   bool preloaded = false;
   bool loaded = false;
-
+  String url="https://i.pinimg.com/564x/54/e2/ae/54e2aeefa75d031813ec56f6b3efc9ad.jpg";
   List<String> urls = [
     "https://i.pinimg.com/564x/54/e2/ae/54e2aeefa75d031813ec56f6b3efc9ad.jpg",
     "https://raw.githubusercontent.com/opencv/opencv/master/samples/data/sudoku.png",
@@ -46,12 +47,8 @@ class _EdgeDetectionPageState extends State<EdgeDetectionPage> {
   }
 
   Future loadImage() async {
-    file = await DefaultCacheManager().getSingleFile(urls[urlIndex]);
+    file = await DefaultCacheManager().getSingleFile(url);
 
-    if (urlIndex >= urls.length - 1) {
-      urlIndex = 0;
-    } else
-      urlIndex++;
     setState(() {
       image = Image.file(file);
       preloaded = true;
@@ -119,6 +116,10 @@ class _EdgeDetectionPageState extends State<EdgeDetectionPage> {
               Center(
                 child: Text('Running on: $_platformVersion\n'),
               ),
+              TextField(
+                controller: url_controller,
+              ),
+              ElevatedButton(onPressed: (){url=url_controller.text;loadImage();}, child: Text('Add image')),
               Text("Before"),
               preloaded
                   ? image
