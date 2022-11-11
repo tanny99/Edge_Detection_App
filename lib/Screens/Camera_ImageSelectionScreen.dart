@@ -140,8 +140,8 @@ class DisplayPictureScreen extends StatelessWidget {
           SizedBox(height: 10,),
           Center(child: Text('Your picked image- ')),
           Image.file(File(imagePath)),
-          SizedBox(height: 10,),
-          imagePath == null?Container():Transform.rotate(angle: pi / 2.0,child: SizedBox(child: ImageConverterPage(file:File(imagePath) )))
+          SizedBox(height: 100,),
+          imagePath == null?Container():Transform.rotate(angle: pi / 2.0,child: Container(width: 300,child: ImageConverterPage(file:File(imagePath) )))
         ],
       ),
     );

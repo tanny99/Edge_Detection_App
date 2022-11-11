@@ -44,10 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Column(
             children: [
+              SizedBox(height: 20,),
               OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> CameraImageSelection(camera: firstCamera)));}, child: Text('Camera')),
+              SizedBox(height: 10,),
               OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> GalleryImagePicker()));}, child: Text('Gallery')),
+              SizedBox(height: 10,),
               OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EdgeDetectionPage()));}, child: Text('URL')),
-              OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> AllConvertedImages()));}, child: Text('All Converted Images')),
+              SizedBox(height: 10,),
+              //OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> AllConvertedImages()));}, child: Text('All Converted Images')),
             ],
           )
         ],
