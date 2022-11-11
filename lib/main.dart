@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'Screens/EdgeDetectionOpenCV.dart';
 import 'package:opencv/opencv.dart';
+import 'package:camera/camera.dart';
 import 'package:opencv/core/core.dart';
 import 'Screens/Gallery_ImagePicker.dart';
 import 'Screens/AllConvertedImages.dart';
 import 'Screens/Camera_ImageSelectionScreen.dart';
+late final firstCamera;
+Future<void>CameraSetup()async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  firstCamera = cameras.first;
+
+
+
+}
 void main() {
+  CameraSetup();
   runApp(const MyApp());
 }
 
@@ -29,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Column(
             children: [
-              OutlinedButton(onPressed: (){openCamera_function();}, child: Text('Camera')),
+              OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> CameraImageSelection(camera: firstCamera)));}, child: Text('Camera')),
               OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> GalleryImagePicker()));}, child: Text('Gallery')),
               OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EdgeDetectionPage()));}, child: Text('URL')),
               OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> AllConvertedImages()));}, child: Text('All Converted Images')),

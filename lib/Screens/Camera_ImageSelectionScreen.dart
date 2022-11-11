@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'package:edge_detection_app/Image_Converter.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:math';
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
@@ -18,7 +18,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       theme: ThemeData.dark(),
-      home: TakePictureScreen(
+      home: CameraImageSelection(
         // Pass the appropriate camera to the TakePictureScreen widget.
         camera: firstCamera,
       ),
@@ -27,8 +27,8 @@ Future<void> main() async {
 }
 
 // A screen that allows users to take a picture using a given camera.
-class TakePictureScreen extends StatefulWidget {
-  const TakePictureScreen({
+class CameraImageSelection extends StatefulWidget {
+  const CameraImageSelection({
     super.key,
     required this.camera,
   });
@@ -36,10 +36,10 @@ class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
 
   @override
-  TakePictureScreenState createState() => TakePictureScreenState();
+  CameraImageSelectionState createState() => CameraImageSelectionState();
 }
 
-class TakePictureScreenState extends State<TakePictureScreen> {
+class CameraImageSelectionState extends State<CameraImageSelection> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
@@ -125,15 +125,25 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
 
+
   const DisplayPictureScreen({super.key, required this.imagePath});
 
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Display the Picture')),
+      appBar: AppBar(title: const Text('Edge Detection App')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
-      body: Image.file(File(imagePath)),
+      body: ListView(
+        children: [
+          SizedBox(height: 10,),
+          Center(child: Text('Your picked image- ')),
+          Image.file(File(imagePath)),
+          SizedBox(height: 10,),
+          imagePath == null?Container():Transform.rotate(angle: pi / 2.0,child: SizedBox(child: ImageConverterPage(file:File(imagePath) )))
+        ],
+      ),
     );
   }
 }
