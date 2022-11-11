@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-Future<void> openCamera_function() async {
+Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +17,7 @@ Future<void> openCamera_function() async {
 
   runApp(
     MaterialApp(
+      theme: ThemeData.dark(),
       home: TakePictureScreen(
         // Pass the appropriate camera to the TakePictureScreen widget.
         camera: firstCamera,
@@ -98,14 +99,17 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             final image = await _controller.takePicture();
 
             if (!mounted) return;
-            File image_file=File(image.path);
 
             // If the picture was taken, display it on a new screen.
-            final metadata = SettableMetadata(contentType: "image/jpeg");
-            final storageRef = FirebaseStorage.instance.ref();
-            final uploadTask = storageRef
-                .child("images/sample.jpg")
-                .putFile(image_file, metadata);
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DisplayPictureScreen(
+                  // Pass the automatically generated path to
+                  // the DisplayPictureScreen widget.
+                  imagePath: image.path,
+                ),
+              ),
+            );
           } catch (e) {
             // If an error occurs, log the error to the console.
             print(e);

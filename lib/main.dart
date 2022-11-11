@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'Screens/EdgeDetectionOpenCV.dart';
 import 'package:opencv/opencv.dart';
 import 'package:opencv/core/core.dart';
+import 'Screens/Gallery_ImagePicker.dart';
+import 'Screens/AllConvertedImages.dart';
 import 'Screens/Camera_ImageSelectionScreen.dart';
 void main() {
   runApp(const MyApp());
@@ -28,9 +30,9 @@ class _MyHomePageState extends State<MyHomePage> {
           Column(
             children: [
               OutlinedButton(onPressed: (){openCamera_function();}, child: Text('Camera')),
-              OutlinedButton(onPressed: (){}, child: Text('Gallery')),
+              OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> GalleryImagePicker()));}, child: Text('Gallery')),
               OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> EdgeDetectionPage()));}, child: Text('URL')),
-              OutlinedButton(onPressed: (){}, child: Text('All Converted Images')),
+              OutlinedButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> AllConvertedImages()));}, child: Text('All Converted Images')),
             ],
           )
         ],
